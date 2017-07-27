@@ -67,7 +67,7 @@ public class StartActivity extends AppCompatActivity implements SensorEventListe
 
             switch (n) {
                 case 0:
-                    imageView.setImageResource(R.drawable.cupid);
+                    imageView.setImageResource(R.drawable.eisuke1);
                     break;
                 case 1:
                     imageView.setImageResource(R.drawable.taiyou);

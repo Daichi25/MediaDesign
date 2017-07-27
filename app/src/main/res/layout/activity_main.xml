@@ -5,24 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.daichi.mediadesign.MainActivity">
+    tools:context="com.example.daichi.mediadesign.MainActivity"
+    android:background="@drawable/start1">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/xValue"
-        android:text= "@+id/xValue"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/yValue"
-        android:text="@+id/yValue"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/zValue"
-        android:text="@+id/zValue"/>
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="190dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="95dp"
+        android:layout_marginTop="400dp"
+        android:text="start !!"
+        android:textColor="#FF55FF"
+        android:textSize="30dp" />
 
 </LinearLayout>

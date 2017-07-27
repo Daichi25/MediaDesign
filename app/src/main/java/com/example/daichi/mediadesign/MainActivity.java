@@ -1,54 +1,34 @@
 package com.example.daichi.mediadesign;
 
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.support.v7.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity implements SensorEventListener{
+import android.view.View;
+import android.widget.Button;
 
-        SensorManager manager;
-        Sensor sensor;
-        TextView xTextView;
-        TextView yTextView;
-        TextView zTextView;
+/**
+ * Created by daichi on 2017/07/20.
+ */
+
+public class MainActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onCreate(Bundle saveInstanceState) {
+        super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_main);
-        xTextView = (TextView)findViewById(R.id.xValue);
-        yTextView = (TextView)findViewById(R.id.yValue);
-        zTextView = (TextView)findViewById(R.id.zValue);
 
-        manager = (SensorManager)getSystemService(SENSOR_SERVICE);
-        sensor = manager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        Button start = (Button) findViewById(R.id.button1);
+        start.setOnClickListener(startButton);
     }
 
-    @Override
-    public void onSensorChanged(SensorEvent event) {
-        xTextView.setText(String.valueOf(event.values[0]));
-        yTextView.setText(String.valueOf(event.values[1]));
-        zTextView.setText(String.valueOf(event.values[2]));
-    }
+    public View.OnClickListener startButton = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(MainActivity.this, StartActivity.class);
+            startActivity(intent);
+        }
+    };
 
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        manager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_UI);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        manager.unregisterListener(this);
-    }
 }

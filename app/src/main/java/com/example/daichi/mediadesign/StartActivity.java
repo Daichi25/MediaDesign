@@ -1,12 +1,16 @@
 package com.example.daichi.mediadesign;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +47,6 @@ public class StartActivity extends AppCompatActivity implements SensorEventListe
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-
         float x = event.values[0];
         float y = event.values[1];
         float z = event.values[2];
@@ -65,19 +68,32 @@ public class StartActivity extends AppCompatActivity implements SensorEventListe
             Random r = new Random();
             int n = r.nextInt(3);
 
-            switch (n) {
-                case 0:
-                    imageView.setImageResource(R.drawable.eisuke1);
-                    break;
-                case 1:
-                    imageView.setImageResource(R.drawable.taiyou);
-                    break;
-                case 2:
-                    imageView.setImageResource(R.drawable.cupid);
-                    break;
-            }
+            try {
+                switch (n) {
+                    case 0:
+                        imageView.setImageBitmap(trimBitmap(R.drawable.eisuke1));
+                        break;
+                    case 1:
+                        imageView.setImageBitmap(trimBitmap(R.drawable.taiyou));
+                        break;
+                    case 2:
+                        imageView.setImageBitmap(trimBitmap(R.drawable.cupid));
+                        break;
+                }
 
+            } catch (OutOfMemoryError outOfMemoryError) {
+                Toast.makeText(this, "Out Of Memory Error", Toast.LENGTH_SHORT).show();
+            }
         }
+    }
+
+    private Bitmap trimBitmap(@DrawableRes int imageRes) {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        //画像をメモリー展開をしないで、rescaleする
+        options.inSampleSize = 4;
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeResource(getResources(), imageRes, options);
     }
 
     @Override
